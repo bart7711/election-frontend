@@ -1,5 +1,7 @@
+import renderLogin from "./pages/login/login.js";
 import renderMain from "./pages/main/main.js";
-import renderAbout from "./pages/about/about.js";
+import renderMainAdmin from "./pages/mainAdmin/mainAdmin.js"
+import renderSignUp from "./pages/signUp/signUp.js"
 
 
 export default function () {
@@ -8,12 +10,16 @@ export default function () {
   router
     .on({
       "/": () => {
-        // call updatePageLinks to let navigo handle the links
-        // when new links have been inserted into the dom
-        renderMain().then(router.updatePageLinks);
+        renderLogin().then(router.updatePageLinks);
       },
-      about: () => {
-        renderAbout();
+      main: ()=>{
+        renderMain();
+      },
+      admin: ()=>{
+        renderMainAdmin();
+      },
+      signup: ()=>{
+        renderSignUp();
       }
     })
     .resolve();
