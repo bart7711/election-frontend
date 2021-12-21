@@ -4,6 +4,7 @@ let userJWTToken = "";
 
 export default () => {
     userJWTToken =  JSON.parse(localStorage.getItem("user"));
+    if (isAdmin()) {
     const content = document.querySelector(".content");
     apiKey= `${window.apiUrl}api/`;
   
@@ -14,6 +15,10 @@ export default () => {
         handleAdminPage();
         renderNavBar();
       });
+    } else{
+      alert("You have to be loged in as admin to access this site.");
+      window.router.navigate("/");
+    }
   };
   
 async function handleAdminPage(){
@@ -52,6 +57,7 @@ function groupBy(arr, party) {
     return memo;
   }, {});
 }
+
 function generateTables(tableCon, candidates){
   for(let key in candidates){
     const candidateCon = candidates[key];
@@ -74,10 +80,13 @@ function generateTables(tableCon, candidates){
     const text0 = document.createTextNode("Full Name");
     cellName.appendChild(text0);
 
-    const cellVote = firstRow.insertCell();
-    const text1 = document.createTextNode("Vote");
-    cellVote.appendChild(text1);
-
+    const cellEdit = firstRow.insertCell();
+    const text1 = document.createTextNode("Edit");
+    cellEdit.appendChild(text1);
+  
+    const cellDelete = firstRow.insertCell();
+    const text2 = document.createTextNode("Delete");
+    cellDelete.appendChild(text2);
     return table;
   }
 
@@ -86,14 +95,22 @@ function generateTables(tableCon, candidates){
     const cell = row.insertCell();
     const text = document.createTextNode(candidate.fullName);
     cell.appendChild(text);
-    const buttonCell = row.insertCell();
+    const buttonEditCell = row.insertCell();
+    const buttonDeleteCell = row.insertCell();
+    
+    const editButton = document.createElement("a");
+    editButton.classList.add('btn','btn-primary');
+    editButton.setAttribute("role","button");
+    editButton.innerHTML="Edit";
+    editButton.href="";
+    buttonEditCell.appendChild(editButton);
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add('btn','btn-primary');
     deleteButton.setAttribute("role","button");
     deleteButton.innerHTML="Delete";
     deleteButton.addEventListener("click",()=> deleteCandidate(candidate.id))
-    buttonCell.appendChild(deleteButton);
+    buttonDeleteCell.appendChild(deleteButton);
   }
   function deleteCandidate(id){
     let key = apiKey + "candidate/"+id;
@@ -105,10 +122,18 @@ function generateTables(tableCon, candidates){
       },
     })
       .then(() => {
-        window.router.navigate("/admin");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  function isAdmin(){
+    //Function to check if the user has an user role.
+    if (userJWTToken == null) {
+      return false;
+    }
+    return userJWTToken.roles.includes("ROLE_ADMIN");
   }
   

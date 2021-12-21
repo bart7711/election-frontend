@@ -123,7 +123,7 @@ function vote(id) {
 }
 
 function isUser() {
-  //Function to check if the user has an admin role.
+  //Function to check if the user has an user role.
   if (userJWTToken == null) {
     return false;
   }

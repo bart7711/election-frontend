@@ -3,6 +3,7 @@ import renderMain from "./pages/main/main.js";
 import renderMainAdmin from "./pages/mainAdmin/mainAdmin.js";
 import renderSignUp from "./pages/signUp/signUp.js";
 import renderThanks from "./pages/thanks/thanks.js";
+import renderResults from "./pages/results/results.js";
 
 
 export default function () {
@@ -24,6 +25,9 @@ export default function () {
       },
       thanks: ()=>{
         renderThanks();
+      },
+      results: ()=>{
+        renderResults();
       }
     })
     .resolve();
