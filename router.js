@@ -4,6 +4,7 @@ import renderMainAdmin from "./pages/mainAdmin/mainAdmin.js";
 import renderSignUp from "./pages/signUp/signUp.js";
 import renderThanks from "./pages/thanks/thanks.js";
 import renderResults from "./pages/results/results.js";
+import renderCreation from "./pages/createCandidate/createCandidate.js"
 
 
 export default function () {
@@ -28,6 +29,9 @@ export default function () {
       },
       results: ()=>{
         renderResults();
+      },
+      "create/party/:partyId/":({ data }) => {
+        renderCreation(data.partyId);    
       }
     })
     .resolve();

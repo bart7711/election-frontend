@@ -62,9 +62,22 @@ function generateTables(tableCon, candidates){
   for(let key in candidates){
     const candidateCon = candidates[key];
     const partyDescription = document.createElement("h3");
+    const div = document.createElement("div");
     const party = candidateCon[0].party;
     partyDescription.textContent=party.name+" - "+party.symbol;
-    tableCon.appendChild(partyDescription);
+
+    div.appendChild(partyDescription);
+    const createButton = document.createElement("a");
+    createButton.classList.add('btn','btn-primary');
+    createButton.href="/#/create/party/"+party.id;
+    createButton.setAttribute("role","button");
+    createButton.innerHTML="Add Candidate";
+    div.appendChild(createButton);
+
+    tableCon.appendChild(div)
+    const br0 = document.createElement("br")
+    tableCon.appendChild(br0);
+
     let table = generateTable();
     candidateCon.forEach(candidate =>generateRows(candidate,table))
     tableCon.appendChild(table);
