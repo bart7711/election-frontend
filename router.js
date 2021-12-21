@@ -30,7 +30,7 @@ export default function () {
       results: ()=>{
         renderResults();
       },
-      "create/party/:partyId/":({ data }) => {
+      "create/party/:partyId":({ data }) => {
         renderCreation(data.partyId);    
       }
     })
