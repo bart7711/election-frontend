@@ -1,3 +1,5 @@
+import renderNavBar from "/pages/navbar/navbar.js";
+
 export default () => {
     const content = document.querySelector(".content");
   
@@ -6,4 +8,5 @@ export default () => {
       .then((aboutHtml) => {
         content.innerHTML = aboutHtml;
       });
+      renderNavBar();
   };

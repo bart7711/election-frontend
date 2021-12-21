@@ -1,3 +1,4 @@
+import renderNavBar from "/pages/navbar/navbar.js";
 let apiKey = "";
 let userJWTToken = "";
 
@@ -12,6 +13,7 @@ export default () => {
       .then((resultsHtml) => {
         content.innerHTML = resultsHtml;
         handleResultPage();
+        renderNavBar();
       });
   } else {
     alert("You have to be loged in as admin to access this site.");
