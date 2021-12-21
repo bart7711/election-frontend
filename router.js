@@ -1,7 +1,8 @@
 import renderLogin from "./pages/login/login.js";
 import renderMain from "./pages/main/main.js";
-import renderMainAdmin from "./pages/mainAdmin/mainAdmin.js"
-import renderSignUp from "./pages/signUp/signUp.js"
+import renderMainAdmin from "./pages/mainAdmin/mainAdmin.js";
+import renderSignUp from "./pages/signUp/signUp.js";
+import renderThanks from "./pages/thanks/thanks.js";
 
 
 export default function () {
@@ -20,6 +21,9 @@ export default function () {
       },
       signup: ()=>{
         renderSignUp();
+      },
+      thanks: ()=>{
+        renderThanks();
       }
     })
     .resolve();
